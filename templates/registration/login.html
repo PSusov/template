@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div style="margin: 0 auto; width: 50%;" align=center>
+{% if form.errors %}
+<div class="alert alert-danger">
+Введен некорректный логин или пароль. Повторите попытку.
+</div>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <div class="alert alert-danger">У Вас нет доступа к данной странице.</div>
+    {% else %}
+    <p>Введите логин и пароль:</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<style>
+td {padding: 5px;}
+</style>
+<table>
+<tr padding="5px;">
+  <td><b>Логин: </b></td>
+  <td><input type="text" name="username" value="stat_adm" autofocus="" required="" id="id_username" class="form-control"></td>
+</tr><tr>
+  <td><b>Пароль: </b></td>
+  <td><input type="password" name="password" required="" id="id_password" class="form-control"></td>
+</tr>
+<tr><td colspan=2 align="right">
+  <button type="submit" class="btn btn-success">Войти</button>
+  <input type="hidden" name="next" value="{{ next }}" />
+</td></tr>
+</table>
+</form>
+<p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+</div>
+{% endblock %}

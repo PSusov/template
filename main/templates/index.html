@@ -1,18 +1,24 @@
 {% extends "base_generic.html" %}
 {% block title %} <title>Главная</title> {% endblock %}
+{% block registration %}
+{% if user.is_authenticated %}
+<p>Вы вошли как <b>{{ user.get_username }}</b>&nbsp;/&nbsp;<a href="{% url 'logout' %}?next={{ request.path }}">Выход</a></p>
+{% else %}
+<a href="{% url 'login' %}?next={{request.path}}">Вход</a>
+{% endif%}
+
+{% endblock %}
 
 {% block content %}
-<!--<small>Number of visits - {{ num_visits }}</small>
-<h2>Выделенные линии</h2>
-
-  <ul>
-    {% for cli in num_cli %}
-    <li><strong><a href="{{ cli.get_absolute_url }}">{{ cli }}</a></strong>
-    {% if perms.main.can_full_view %}
-    ({{cli.creator}})
-    {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
--->
+<div style="margin-top: 100px;"></div>
+<div class="col-sm-12 col-sm-offset-2">
+    <div class="panel panel-info">
+	<div class="panel-heading">
+	    <h3 class="panel-title">Test title</h3>
+	</div>
+	<div class="panel-body">
+	    <div class="alert alert-success">Test content</div>
+	</div>
+    </div>
+</div>
 {% endblock %}
