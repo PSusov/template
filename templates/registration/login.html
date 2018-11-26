@@ -1,19 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div style="margin: 0 auto; width: 50%;" align=center>
-{% if form.errors %}
-<div class="alert alert-danger">
-Введен некорректный логин или пароль. Повторите попытку.
-</div>
-{% endif %}
-
+<div class="col-sm-10 col-sm-offset-2" align=center>
+    <div class="panel panel-default">
+        <div class="panel-heading">
 {% if next %}
     {% if user.is_authenticated %}
     <div class="alert alert-danger">У Вас нет доступа к данной странице.</div>
     {% else %}
-    <p>Введите логин и пароль:</p>
+	    <h4 class="panel-title">Введите логин и пароль:</h3>
+	</div>
     {% endif %}
+{% endif %}
+<div class="panel-body">
+{% if form.errors %}
+<div class="alert alert-danger">
+Введен некорректный логин или пароль. Повторите попытку.
+</div>
 {% endif %}
 
 <form method="post" action="{% url 'login' %}">
@@ -36,5 +39,7 @@ td {padding: 5px;}
 </table>
 </form>
 <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+</div>
+</div>
 </div>
 {% endblock %}
